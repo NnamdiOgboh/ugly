@@ -1,8 +1,45 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { ArrowRightCircle } from 'react-bootstrap-icons';
 import './Banner.css';
 
 const Banner = () => {
+  const [loopNum, setLoopNum] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [text, setText] = useState('');
+  const [delta, setDelta] = useState(300 - Math.random() * 100);
+  const toRotate = ["WELCOME TO MY CIRCUS"];
+  const period = 2000;
+
+  useEffect(() => {
+    let ticker = setInterval(() => {
+      tick();
+    }, delta);
+
+    return () => { clearInterval(ticker) };
+  }, [text, delta]);
+
+  const tick = () => {
+    let i = loopNum % toRotate.length;
+    let fullText = toRotate[i];
+    let updatedText = isDeleting ? fullText.substring(0, text.length - 1) : fullText.substring(0, text.length + 1);
+
+    setText(updatedText);
+
+    if (isDeleting) {
+      setDelta(prevDelta => prevDelta / 2);
+    }
+
+    if (!isDeleting && updatedText === fullText) {
+      setIsDeleting(true);
+      setDelta(period);
+    } else if (isDeleting && updatedText === '') {
+      setIsDeleting(false);
+      setLoopNum(loopNum + 1);
+      setDelta(500);
+    }
+  };
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -35,35 +72,40 @@ const Banner = () => {
         animate="visible"
       >
         <motion.div className="banner-text" variants={itemVariants}>
+          <motion.span 
+            className="tagline"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+          >
+            Welcome to my Portfolio
+          </motion.span>
           <motion.h1
             initial={{ scale: 0.5, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 0.5, duration: 1, type: "spring", stiffness: 100 }}
           >
-            Welcome to My Artistic Journey
+            {`Hi I'm CHINEDU `}
+            <motion.span 
+              className="wrap"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1, duration: 0.5 }}
+            >
+              {text}
+            </motion.span>
           </motion.h1>
           <motion.p 
             className="artist-intro"
             variants={itemVariants}
           >
-            Hello! I'm an artist passionate about expressing emotions and stories through visual art. 
-            My work explores the beauty in imperfection, the raw emotions of human experience, and 
-            the unconventional perspectives that make art truly meaningful. Each piece tells a story, 
-            captures a moment, or challenges the viewer to see the world through a different lens.
-          </motion.p>
-          <motion.p 
-            className="artist-mission"
-            variants={itemVariants}
-          >
-            Through "uglyarts," I aim to redefine beauty standards in art and showcase that true 
-            artistry lies not in perfection, but in authenticity and emotional depth. Every brushstroke, 
-            every color choice, and every composition is a piece of my soul shared with the world.
+            This is the section where you write about yourself and anything you would want your audience to know about the ugly art.
           </motion.p>
           <motion.button 
             className="cta-button" 
             onClick={() => {
-              const gallery = document.getElementById('gallery');
-              if (gallery) gallery.scrollIntoView({ behavior: 'smooth' });
+              const contact = document.getElementById('contact');
+              if (contact) contact.scrollIntoView({ behavior: 'smooth' });
             }}
             variants={itemVariants}
             whileHover={{ 
@@ -72,7 +114,7 @@ const Banner = () => {
             }}
             whileTap={{ scale: 0.95 }}
           >
-            Explore My Work
+            Let's connect <ArrowRightCircle size={25} style={{ marginLeft: '10px' }} />
           </motion.button>
         </motion.div>
         <motion.div 

@@ -49,6 +49,16 @@
   align-items: center;
 }
 
+.tagline {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.8px;
+  margin-bottom: 1rem;
+  display: block;
+  text-transform: uppercase;
+}
+
 .banner-text h1 {
   font-size: 3.5rem;
   font-weight: bold;
@@ -58,6 +68,20 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+.wrap {
+  border-right: 0.08em solid #fff;
+  animation: cursor 1s infinite;
+}
+
+@keyframes cursor {
+  0%, 50% {
+    border-color: transparent;
+  }
+  51%, 100% {
+    border-color: #fff;
+  }
 }
 
 .artist-intro {
@@ -85,6 +109,10 @@
   cursor: pointer;
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
 .cta-button:hover {
