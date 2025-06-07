@@ -135,9 +135,9 @@ const Contact = () => {
                 <div>
                   <h4>Social Media</h4>
                   <div className="social-links">
-                    <a href="#" className="social-link">Instagram</a>
-                    <a href="#" className="social-link">Twitter</a>
-                    <a href="#" className="social-link">LinkedIn</a>
+                    <a href="https://instagram.com" className="social-link" target="_blank" rel="noopener noreferrer">Instagram</a>
+                    <a href="https://twitter.com" className="social-link" target="_blank" rel="noopener noreferrer">Twitter</a>
+                    <a href="https://linkedin.com" className="social-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
                   </div>
                 </div>
               </motion.div>
