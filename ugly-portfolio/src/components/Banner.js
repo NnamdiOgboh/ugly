@@ -1,62 +1,112 @@
-import { useState, useEffect } from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import headerImg from "../assets/img/header-img.svg";
-import { ArrowRightCircle } from 'react-bootstrap-icons';
+import React from 'react';
+import { motion } from 'framer-motion';
+import './Banner.css';
 
-
-export const Banner = () => {
-  const [loopNum, setLoopNum] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [text, setText] = useState('');
-  const [delta, setDelta] = useState(300 - Math.random() * 100);
-  const toRotate = [ "WELCOME TO MY CIRCUS" ];
-  const period = 2000;
-
-  useEffect(() => {
-    let ticker = setInterval(() => {
-      tick();
-    }, delta);
-
-    return () => { clearInterval(ticker) };
-  }, [text])
-
-  const tick = () => {
-    let i = loopNum % toRotate.length;
-    let fullText = toRotate[i];
-    let updatedText = isDeleting ? fullText.substring(0, text.length - 1) : fullText.substring(0, text.length + 1);
-
-    setText(updatedText);
-
-    if (isDeleting) {
-      setDelta(prevDelta => prevDelta / 2);
+const Banner = () => {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        delayChildren: 0.3,
+        staggerChildren: 0.2
+      }
     }
+  };
 
-    if (!isDeleting && updatedText === fullText) {
-      setIsDeleting(true);
-      setDelta(period);
-    } else if (isDeleting && updatedText === '') {
-      setIsDeleting(false);
-      setLoopNum(loopNum + 1);
-      setDelta(500);
-    } 
-  }
+  const itemVariants = {
+    hidden: { y: 50, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    }
+  };
 
-    return (
-        <section className="banner" id="home">
-            <Container>
-                <Row className="align-items-center">
-                    <Col xs={12} md={6} xl={7} >
-                        <span className="tagline">Welcome to my Portfolio</span>
-                        <h1>{`Hi I'm CHINEDU `}<span className="wrap">{text}</span></h1>
-                        <p>This is the section where you write about yourself and anything you would want your audience to know about the ugly art.</p>
-                        <button onClick={() => console.log('connect')}>Let's connect <ArrowRightCircle size={25} /></button>
-                    </Col>
-                    <Col xs={12} md={6} xl={5} >
-                        <img src={headerImg} alt="Header  img" />
-                    </Col>
-                </Row>
-            </Container>
-        </section>
-    )
-  
-}
+  return (
+    <section id="home" className="banner">
+      <motion.div 
+        className="banner-content"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        <motion.div className="banner-text" variants={itemVariants}>
+          <motion.h1
+            initial={{ scale: 0.5, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.5, duration: 1, type: "spring", stiffness: 100 }}
+          >
+            Welcome to My Artistic Journey
+          </motion.h1>
+          <motion.p 
+            className="artist-intro"
+            variants={itemVariants}
+          >
+            Hello! I'm an artist passionate about expressing emotions and stories through visual art. 
+            My work explores the beauty in imperfection, the raw emotions of human experience, and 
+            the unconventional perspectives that make art truly meaningful. Each piece tells a story, 
+            captures a moment, or challenges the viewer to see the world through a different lens.
+          </motion.p>
+          <motion.p 
+            className="artist-mission"
+            variants={itemVariants}
+          >
+            Through "uglyarts," I aim to redefine beauty standards in art and showcase that true 
+            artistry lies not in perfection, but in authenticity and emotional depth. Every brushstroke, 
+            every color choice, and every composition is a piece of my soul shared with the world.
+          </motion.p>
+          <motion.button 
+            className="cta-button" 
+            onClick={() => {
+              const gallery = document.getElementById('gallery');
+              if (gallery) gallery.scrollIntoView({ behavior: 'smooth' });
+            }}
+            variants={itemVariants}
+            whileHover={{ 
+              scale: 1.05, 
+              boxShadow: "0 15px 40px rgba(255, 255, 255, 0.3)"
+            }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Explore My Work
+          </motion.button>
+        </motion.div>
+        <motion.div 
+          className="banner-image"
+          initial={{ x: 100, opacity: 0, rotate: 10 }}
+          animate={{ x: 0, opacity: 1, rotate: 0 }}
+          transition={{ delay: 1, duration: 1, type: "spring", stiffness: 80 }}
+        >
+          <motion.div 
+            className="artist-placeholder"
+            whileHover={{ 
+              scale: 1.1, 
+              rotate: 5,
+              boxShadow: "0 20px 50px rgba(255, 255, 255, 0.3)"
+            }}
+            animate={{
+              y: [0, -10, 0],
+            }}
+            transition={{
+              y: {
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }
+            }}
+          >
+            <span>🎨</span>
+            <p>Artist Photo</p>
+          </motion.div>
+        </motion.div>
+      </motion.div>
+    </section>
+  );
+};
+
+export default Banner;
+

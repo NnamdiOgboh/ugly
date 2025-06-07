@@ -1,0 +1,254 @@
+.gallery {
+  padding: 80px 0;
+  background: white;
+}
+
+.gallery-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.gallery h2 {
+  text-align: center;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #333;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gallery-description {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 4rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.gallery-item {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.gallery-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.artwork-placeholder {
+  height: 250px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #666;
+}
+
+.artwork-icon {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.artwork-placeholder p {
+  font-size: 1.1rem;
+  opacity: 0.7;
+}
+
+.artwork-info {
+  padding: 1.5rem;
+}
+
+.artwork-info h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.artwork-medium {
+  color: #666;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* Modal styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  backdrop-filter: blur(5px);
+}
+
+.modal-content {
+  background: white;
+  border-radius: 20px;
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: auto;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.1);
+  color: #333;
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.modal-close:hover {
+  background: rgba(0, 0, 0, 0.2);
+  transform: scale(1.1);
+}
+
+.modal-image {
+  border-radius: 20px 0 0 20px;
+  overflow: hidden;
+}
+
+.artwork-placeholder-large {
+  height: 100%;
+  min-height: 400px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #666;
+}
+
+.artwork-icon-large {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.modal-info {
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.modal-info h3 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.modal-medium {
+  color: #666;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  opacity: 0.8;
+}
+
+.modal-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #555;
+}
+
+/* Mobile responsiveness */
+@media screen and (max-width: 768px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .gallery h2 {
+    font-size: 2.5rem;
+  }
+
+  .gallery-description {
+    font-size: 1.1rem;
+  }
+
+  .modal-content {
+    grid-template-columns: 1fr;
+    max-width: 95vw;
+    max-height: 95vh;
+  }
+
+  .modal-image {
+    border-radius: 20px 20px 0 0;
+  }
+
+  .artwork-placeholder-large {
+    min-height: 250px;
+  }
+
+  .modal-info {
+    padding: 2rem;
+  }
+
+  .modal-info h3 {
+    font-size: 1.5rem;
+  }
+
+  .modal-medium {
+    font-size: 1rem;
+  }
+
+  .modal-description {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery h2 {
+    font-size: 2rem;
+  }
+
+  .artwork-placeholder {
+    height: 200px;
+  }
+
+  .artwork-info {
+    padding: 1rem;
+  }
+
+  .modal-info {
+    padding: 1.5rem;
+  }
+}
+
